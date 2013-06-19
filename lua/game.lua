@@ -87,7 +87,7 @@ levelState.did.apply.jump = function()
     scene.playerAction:addChild(
       scene.player:moveLoc(0, PLAYER_JUMP_HEIGHT, 0, PLAYER_JUMP_TIME, MOAIEaseType.EASE_OUT))
   end)
-  flower.Executors.callLaterTime(PLAYER_JUMP_TIME, function()
+  flower.Executors.callLaterTime(2 * PLAYER_JUMP_TIME, function()
     levelState:land()
   end)
 end
