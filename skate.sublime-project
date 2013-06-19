@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": ".",
+      "file_exclude_patterns": ["*.sublime-*"]
+		}
+	],
+  "build_systems": [
+    {
+      "name": "Moai",
+      "cmd": ["make", "run"],
+      "working_dir": "$project_path",
+      "file_regex": "^\\s*([^:\\t]*lua)[:\\t](\\d*)",
+      "line_regex": "^ \\[(\\d+)\\] >>",
+      "selector": "source.lua"
+    }
+  ]
+}
