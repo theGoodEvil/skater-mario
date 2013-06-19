@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="40" height="14" tilewidth="16" tileheight="16" backgroundcolor="#5c94fc">
+<map version="1.0" orientation="orthogonal" width="200" height="14" tilewidth="16" tileheight="16" backgroundcolor="#5c94fc">
  <tileset firstgid="1" name="mario-tiles" tilewidth="16" tileheight="16">
   <image source="img/mario-tiles.png" width="528" height="448"/>
  </tileset>
@@ -12,9 +12,9 @@
  <tileset firstgid="2377" name="mario-tiles" tilewidth="16" tileheight="16">
   <image source="img/mario-tiles.png" width="528" height="448"/>
  </tileset>
- <layer name="Tile Layer 1" width="40" height="14">
+ <layer name="Tile Layer 1" width="200" height="14">
   <data encoding="base64" compression="zlib">
-   eJzt01kKwjAUheEMvji7Dmd3JrgWdQtOfVW34LgQxy34Sw1GpFC1wT7kwAchhNyTQoXwcZmMDqUxIyXEGBNMMUOgnp27D/f02R9gqNx0se/v6dCK9RobbLHDPqLfnP0Fll/2M/Oj3mjfb/odWB9xwhkXXNV7tyRi5n/yxjzzCyiihDIq+vX7/TN15jfQRAttdKx+af1vfNwlK4XIyeTPJpUq82oxZ8Y5K72f3ACFPSOj
+   eJztl1dOw0AQhtc2LxA6t6B3roXEWYArhPYKXIF6EOoV+FFisTg79pbZdRzNL31SHpKZf5qtKCUSiUQiEb+migFd0Gmu1Bk4z9t2IooprjmXcXxj9fGbC3AJrsA1uMn/buZ4CKfnEN0i9x24T+ihrbpj5g3dm9jimnMZxyaW3u+TYsADPj+CJ/AMXsArcR+hnsd9JpR86w6tl2NHqBtz2RvfHF2T3u/yPt7w+R18gE/wBb7z0dvgzJ/6+V8q9Rzbrlf3EDN/G+/0VOph/2fBHJgHC2Cx+P/+mBRN8hxFcbSO/d8Am2ALbIMd7T668r9dJBKJRKOazpSaydLkWk6UZ9yk152y36FKPS+f3sT2uIr4awn6sIQc+2ClIRfH/lRj+PaQw0u1bs5+1/kz1exSDzWvkJ40zcG1N3U7xfUc4r6PA8Q6BEdazN86dsHekLobqfoxxWvKq8ewvUtTHpve1Pkz1a3HtK2NykX5o2o2fd91Xk09oWqymQMV22enfH3aeHKZWyYIgiAIHvwALD9i0g==
   </data>
  </layer>
 </map>

@@ -6,7 +6,7 @@ local tiled = require "tiled"
 local PLAYER_OFFSET_LEFT = 3 * 16
 local PLAYER_OFFSET_TOP = 11 * 16
 local PLAYER_JUMP_TIME = 0.4
-local PLAYER_JUMP_HEIGHT = 64
+local PLAYER_JUMP_HEIGHT = 80
 
 local TILE_IS_OBSTACLE = {}
 TILE_IS_OBSTACLE[265] = true
@@ -62,7 +62,8 @@ local levelState = statemachine.create({
 })
 
 levelState.did.apply.start = function()
-  scene.playerAction = scene.player:moveLoc(800, 0, 0, 5, MOAIEaseType.LINEAR)
+  local distance = scene.tileMap:getWidth()
+  scene.playerAction = scene.player:moveLoc(distance, 0, 0, distance / 160, MOAIEaseType.LINEAR)
 end
 
 levelState.did.apply.stop = function()
