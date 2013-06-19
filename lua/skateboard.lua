@@ -40,7 +40,7 @@ function onUpdate()
     scene.tileMap:getWidth() - flower.viewWidth)
   scene.camera:setLoc(cameraX, 0)
 
-  if x > scene.tileMap:getWidth() - 3 * 16 then
+  if x > scene.tileMap:getWidth() - 4 * 16 then
     flower.gotoScene("cutscene", {
       message = "ready to go again!",
       next = function() flower.gotoScene("game") end
