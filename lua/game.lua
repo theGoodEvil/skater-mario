@@ -1,13 +1,19 @@
 module(..., package.seeall)
 
-tiled = require "tiled"
+local tiled = require "tiled"
+
+local KEY_A = 97
+local KEY_D = 100
+
+local keyDown = {}
+local started = false
 
 function onCreate()
   local layer = flower.Layer()
   layer:setClearColor(92 / 255, 148 / 255, 252 / 255)
   layer:setScene(scene)
 
-  tileMap = tiled.TileMap()
+  local tileMap = tiled.TileMap()
   tileMap:loadLueFile("level1.lua")
   tileMap:setLayer(layer)
 
