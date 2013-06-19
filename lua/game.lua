@@ -30,12 +30,22 @@ function onCreate()
     tileSet:loadTexture():setFilter(MOAITexture.GL_NEAREST)
   end
 
-  scene.player = flower.SheetImage("../img/mario-players.png")
-  scene.player:setTileSize(16, 16)
-  scene.player:setIndex(51)
+  scene.player = flower.Group()
   scene.player:setLoc(PLAYER_OFFSET_LEFT, PLAYER_OFFSET_TOP)
   scene.player:setLayer(layer)
-  scene.player:setPriority(1000)
+
+  local playerBottom = flower.SheetImage("../img/mario-players.png")
+  playerBottom:setTileSize(16, 16)
+  playerBottom:setIndex(34)
+  playerBottom:setPriority(1000)
+  scene.player:addChild(playerBottom)
+
+  local playerTop = flower.SheetImage("../img/mario-players.png")
+  playerTop:setTileSize(16, 16)
+  playerTop:setIndex(12)
+  playerTop:setLoc(0, -16)
+  playerTop:setPriority(1000)
+  scene.player:addChild(playerTop)
 
   scene.camera = flower.Camera()
   layer:setCamera(scene.camera)
