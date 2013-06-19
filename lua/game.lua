@@ -4,6 +4,7 @@ local statemachine = require "statemachine"
 local tiled = require "tiled"
 
 local PLAYER_OFFSET_LEFT = 3 * 16
+local PLAYER_OFFSET_TOP = 11 * 16
 local PLAYER_JUMP_TIME = 0.3
 local PLAYER_JUMP_HEIGHT = 64
 
@@ -15,8 +16,6 @@ TILE_IS_OBSTACLE[299] = true
 
 local KEY_A = 97
 local KEY_D = 100
-
-local started = false
 
 function onCreate()
   local layer = flower.Layer()
@@ -34,11 +33,45 @@ function onCreate()
   scene.player = flower.SheetImage("../img/mario-players.png")
   scene.player:setTileSize(16, 16)
   scene.player:setIndex(51)
-  scene.player:setLoc(PLAYER_OFFSET_LEFT, 11 * 16)
+  scene.player:setLoc(PLAYER_OFFSET_LEFT, PLAYER_OFFSET_TOP)
   scene.player:setLayer(layer)
 
   scene.camera = flower.Camera()
   layer:setCamera(scene.camera)
+end
+
+local levelState = statemachine.create({
+  initial = "stopped",
+  events = {
+    { name = "start", from = "stopped",                to = "running" },
+    { name = "stop",  from = { "running", "jumping" }, to = "stopped" },
+    { name = "jump",  from = "running",                to = "jumping" },
+    { name = "land",  from = "jumping",                to = "running" }
+  }
+})
+
+levelState.did.apply.start = function()
+  scene.playerAction = scene.player:moveLoc(800, 0, 0, 5, MOAIEaseType.LINEAR)
+end
+
+levelState.did.apply.stop = function()
+  scene.playerAction:stop()
+
+  x, y = scene.player:getLoc()
+  scene.player:setLoc(16 * (x / 16 + 2), PLAYER_OFFSET_TOP)
+end
+
+levelState.did.apply.jump = function()
+  scene.playerAction:addChild(
+    scene.player:moveLoc(0, -PLAYER_JUMP_HEIGHT, 0, PLAYER_JUMP_TIME, MOAIEaseType.EASE_IN))
+
+  flower.Executors.callLaterTime(PLAYER_JUMP_TIME, function()
+    scene.playerAction:addChild(
+      scene.player:moveLoc(0, PLAYER_JUMP_HEIGHT, 0, PLAYER_JUMP_TIME, MOAIEaseType.EASE_OUT))
+  end)
+  flower.Executors.callLaterTime(PLAYER_JUMP_TIME, function()
+    levelState:land()
+  end)
 end
 
 function onUpdate()
@@ -56,31 +89,8 @@ function onUpdate()
   local gid = layer:getGid(tileX, tileY)
 
   if TILE_IS_OBSTACLE[gid] then
-    print "boom"
+    levelState:stop()
   end
-end
-
-local levelState = statemachine.create({
-  initial = "stopped",
-  events = {
-    { name = "start", from = "stopped", to = "running" },
-    { name = "jump", from = "running", to = "jumping" },
-    { name = "land", from = "jumping", to = "running" }
-  }
-})
-
-levelState.did.apply.start = function()
-  scene.player:moveLoc(800, 0, 0, 5, MOAIEaseType.LINEAR)
-end
-
-levelState.did.apply.jump = function()
-  scene.player:moveLoc(0, -PLAYER_JUMP_HEIGHT, 0, PLAYER_JUMP_TIME, MOAIEaseType.EASE_IN)
-  flower.Executors.callLaterTime(PLAYER_JUMP_TIME, function()
-    scene.player:moveLoc(0, PLAYER_JUMP_HEIGHT, 0, PLAYER_JUMP_TIME, MOAIEaseType.EASE_OUT)
-  end)
-  flower.Executors.callLaterTime(PLAYER_JUMP_TIME, function()
-    levelState:land()
-  end)
 end
 
 local keyState = statemachine.create({
