@@ -49,7 +49,7 @@ function onUpdate()
 end
 
 local function moveForward()
-  scene.player:moveLoc(16, 0, 0, 0.2)
+  scene.player:moveLoc(64, 0, 0, 0.5)
 end
 
 local nextKey = nil

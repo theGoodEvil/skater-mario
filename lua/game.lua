@@ -5,7 +5,7 @@ local tiled = require "tiled"
 
 local PLAYER_OFFSET_LEFT = 3 * 16
 local PLAYER_OFFSET_TOP = 11 * 16
-local PLAYER_JUMP_TIME = 0.3
+local PLAYER_JUMP_TIME = 0.4
 local PLAYER_JUMP_HEIGHT = 64
 
 local TILE_IS_OBSTACLE = {}
