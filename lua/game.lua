@@ -90,9 +90,10 @@ function onUpdate()
   tileX = math.floor(x / 16)
   tileY = math.floor(y / 16)
   local layer = scene.tileMap:getMapLayers()[1]
-  local gid = layer:getGid(tileX, tileY)
+  local gidLeft = layer:getGid(tileX, tileY)
+  local gidRight = layer:getGid(tileX + 1, tileY)
 
-  if TILE_IS_OBSTACLE[gid] then
+  if TILE_IS_OBSTACLE[gidLeft] or TILE_IS_OBSTACLE[gidRight] then
     levelState:stop()
   end
 end
