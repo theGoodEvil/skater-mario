@@ -6,9 +6,15 @@
  <tileset firstgid="925" name="mario-players" tilewidth="16" tileheight="16">
   <image source="img/mario-players.png" width="352" height="528"/>
  </tileset>
+ <tileset firstgid="1651" name="mario-players" tilewidth="16" tileheight="16">
+  <image source="img/mario-players.png" width="352" height="528"/>
+ </tileset>
+ <tileset firstgid="2377" name="mario-tiles" tilewidth="16" tileheight="16">
+  <image source="img/mario-tiles.png" width="528" height="448"/>
+ </tileset>
  <layer name="Tile Layer 1" width="40" height="14">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4AwmMrEwDANiKczDU67tgHVbgfiHWS6D2YnMfZSahc5AGYnve0dBaOAnoCTkYGBi5H6aqkFtID2aRNpJzFqGUcxRRgAWm8OUw==
+   eJzt01kKwjAUheEMvji7Dmd3JrgWdQtOfVW34LgQxy34Sw1GpFC1wT7kwAchhNyTQoXwcZmMDqUxIyXEGBNMMUOgnp27D/f02R9gqNx0se/v6dCK9RobbLHDPqLfnP0Fll/2M/Oj3mjfb/odWB9xwhkXXNV7tyRi5n/yxjzzCyiihDIq+vX7/TN15jfQRAttdKx+af1vfNwlK4XIyeTPJpUq82oxZ8Y5K72f3ACFPSOj
   </data>
  </layer>
 </map>
