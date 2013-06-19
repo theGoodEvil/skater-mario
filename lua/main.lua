@@ -1,4 +1,4 @@
 flower = require "flower"
 
-flower.openWindow("rhythmic", 640, 480)
+flower.openWindow("rhythmic", 640, 224)
 flower.openScene("game")
