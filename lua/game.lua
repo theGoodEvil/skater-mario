@@ -21,6 +21,10 @@ function onCreate()
   scene.tileMap:loadLueFile("level1.lua")
   scene.tileMap:setLayer(layer)
 
+  for _, tileSet in ipairs(scene.tileMap:getTilesets()) do
+    tileSet:loadTexture():setFilter(MOAITexture.GL_NEAREST)
+  end
+
   scene.player = flower.SheetImage("../img/mario-players.png")
   scene.player:setTileSize(16, 16)
   scene.player:setIndex(51)

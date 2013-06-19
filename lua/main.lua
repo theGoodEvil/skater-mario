@@ -2,5 +2,7 @@ io.stdout:setvbuf("no")
 
 flower = require "flower"
 
-flower.openWindow("rhythmic", 256, 224)
+local scale = 3
+
+flower.openWindow("rhythmic", scale * 256, scale * 224, scale)
 flower.openScene("game")
