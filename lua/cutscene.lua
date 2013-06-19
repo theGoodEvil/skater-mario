@@ -14,7 +14,7 @@ function onOpen(e)
   scene.label:setString(params.message)
 
   flower.Executors.callLaterTime(4, function()
-    flower.openScene(params.nextScene)
+    params.next()
     flower.closeScene()
   end)
 end

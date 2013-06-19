@@ -39,6 +39,13 @@ function onUpdate()
     x - PLAYER_OFFSET_LEFT,
     scene.tileMap:getWidth() - flower.viewWidth)
   scene.camera:setLoc(cameraX, 0)
+
+  if x > scene.tileMap:getWidth() - 3 * 16 then
+    flower.gotoScene("cutscene", {
+      message = "ready to go again!",
+      next = function() flower.gotoScene("game") end
+    })
+  end
 end
 
 local function moveForward()

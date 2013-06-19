@@ -63,9 +63,9 @@ levelState.did.apply.stop = function()
   scene.player:setLoc(16 * (x / 16 + 2), PLAYER_OFFSET_TOP)
 
   -- play intermediate level
-  flower.openScene("cutscene", {
+  flower.gotoScene("cutscene", {
     message = "your skateboard is gone. go pick it up again!",
-    nextScene = "skateboard"
+    next = function() flower.gotoScene("skateboard") end
   })
 end
 
