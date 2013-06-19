@@ -26,6 +26,7 @@ function onCreate()
   scene.player:setIndex(51)
   scene.player:setLoc(PLAYER_OFFSET_LEFT, PLAYER_OFFSET_TOP)
   scene.player:setLayer(layer)
+  scene.player:setPriority(1000)
 
   scene.camera = flower.Camera()
   layer:setCamera(scene.camera)
