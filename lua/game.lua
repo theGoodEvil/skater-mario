@@ -7,6 +7,12 @@ local PLAYER_OFFSET_LEFT = 3 * 16
 local PLAYER_JUMP_TIME = 0.3
 local PLAYER_JUMP_HEIGHT = 64
 
+local TILE_IS_OBSTACLE = {}
+TILE_IS_OBSTACLE[265] = true
+TILE_IS_OBSTACLE[266] = true
+TILE_IS_OBSTACLE[298] = true
+TILE_IS_OBSTACLE[299] = true
+
 local KEY_A = 97
 local KEY_D = 100
 
@@ -36,11 +42,22 @@ function onCreate()
 end
 
 function onUpdate()
-  x = scene.player:getLoc()
+  -- update camera
+  x, y = scene.player:getLoc()
   cameraX = math.min(
     x - PLAYER_OFFSET_LEFT,
     scene.tileMap:getWidth() - flower.viewWidth)
   scene.camera:setLoc(cameraX, 0)
+
+  -- check collision
+  tileX = math.floor(x / 16)
+  tileY = math.floor(y / 16)
+  local layer = scene.tileMap:getMapLayers()[1]
+  local gid = layer:getGid(tileX, tileY)
+
+  if TILE_IS_OBSTACLE[gid] then
+    print "boom"
+  end
 end
 
 local levelState = statemachine.create({
