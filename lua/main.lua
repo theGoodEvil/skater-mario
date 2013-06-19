@@ -2,7 +2,8 @@ io.stdout:setvbuf("no")
 
 flower = require "flower"
 
-local scale = 3
+flower.Font.DEFAULT_FONT = "../img/emulogic.ttf"
 
-flower.openWindow("rhythmic", scale * 256, scale * 224, scale)
+local scale = 3
+flower.openWindow("skater mario", scale * 256, scale * 224, scale)
 flower.openScene("game")
