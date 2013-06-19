@@ -57,8 +57,12 @@ end
 levelState.did.apply.stop = function()
   scene.playerAction:stop()
 
+  -- reset player
   x, y = scene.player:getLoc()
   scene.player:setLoc(16 * (x / 16 + 2), PLAYER_OFFSET_TOP)
+
+  -- play intermediate level
+  flower.openScene("skateboard")
 end
 
 levelState.did.apply.jump = function()

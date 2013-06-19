@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="14" tilewidth="16" tileheight="16" backgroundcolor="#5c94fc">
+ <tileset firstgid="1" name="mario-tiles" tilewidth="16" tileheight="16">
+  <image source="img/mario-tiles.png" width="528" height="448"/>
+ </tileset>
+ <tileset firstgid="925" name="mario-players" tilewidth="16" tileheight="16">
+  <image source="img/mario-players.png" width="352" height="528"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="60" height="14">
+  <data encoding="base64" compression="zlib">
+   eJztkl0OwUAURu90B1gAtuD3CYmFYBdYCBJUd4EEiaU5EvPSh87kVmWi/ZLz1DtzvtuMyO8SRyInSKKw7qpSJZ0N72oLu4Del28nTfczsxe4Kve1zm/+M99OebtrYp2+3j0zBzgG9J6KzI097/Aoyb4hZGRExjAx5XDPcM1h4XDWC+jk69Ykq2/i8NX43oGGslcrhzudJfMrWGecc/V9Os72oPvhfUcfBjD06NpkZgpthdvGVPw1L2oCJDQ=
+  </data>
+ </layer>
+</map>
