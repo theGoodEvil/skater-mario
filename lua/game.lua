@@ -1,13 +1,15 @@
 module(..., package.seeall)
 
+local statemachine = require "statemachine"
 local tiled = require "tiled"
 
 local PLAYER_OFFSET_LEFT = 3 * 16
+local PLAYER_JUMP_TIME = 0.3
+local PLAYER_JUMP_HEIGHT = 64
 
 local KEY_A = 97
 local KEY_D = 100
 
-local keyDown = {}
 local started = false
 
 function onCreate()
@@ -37,22 +39,59 @@ function onUpdate()
   scene.camera:setLoc(cameraX, 0)
 end
 
-local function start()
-  started = true
+local levelState = statemachine.create({
+  initial = "stopped",
+  events = {
+    { name = "start", from = "stopped", to = "running" },
+    { name = "jump", from = "running", to = "jumping" },
+    { name = "land", from = "jumping", to = "running" }
+  }
+})
+
+levelState.did.apply.start = function()
   scene.player:moveLoc(800, 0, 0, 5, MOAIEaseType.LINEAR)
 end
 
-local function onKeyDown(e)
-  keyDown[e.key] = true
+levelState.did.apply.jump = function()
+  scene.player:moveLoc(0, -PLAYER_JUMP_HEIGHT, 0, PLAYER_JUMP_TIME, MOAIEaseType.EASE_IN)
+  flower.Executors.callLaterTime(PLAYER_JUMP_TIME, function()
+    scene.player:moveLoc(0, PLAYER_JUMP_HEIGHT, 0, PLAYER_JUMP_TIME, MOAIEaseType.EASE_OUT)
+  end)
+  flower.Executors.callLaterTime(PLAYER_JUMP_TIME, function()
+    levelState:land()
+  end)
+end
 
-  if not started then
-    bothKeysDown = e.key == KEY_A and keyDown[KEY_D] or e.key == KEY_D and keyDown[KEY_A]
-    if bothKeysDown then start() end
+local keyState = statemachine.create({
+  initial = "up",
+  events = {
+    { name = "keysDown", from = "up", to = "down" },
+    { name = "keysUp", from = "down", to = "up" }
+  }
+})
+
+keyState.did.enter.down = function()
+  levelState:start()
+end
+
+keyState.did.enter.up = function(self, name, from, to)
+  levelState:jump()
+end
+
+local keyIsDown = {}
+
+local function onKeyDown(e)
+  keyIsDown[e.key] = true
+  if keyIsDown[KEY_A] == true and keyIsDown[KEY_D] == true then
+    keyState:keysDown()
   end
 end
 
 local function onKeyUp(e)
-  keyDown[e.key] = false
+  keyIsDown[e.key] = false
+  if keyIsDown[KEY_A] ~= true and keyIsDown[KEY_D] ~= true then
+    keyState:keysUp()
+  end
 end
 
 function onOpen()
