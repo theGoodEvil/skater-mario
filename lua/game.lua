@@ -22,13 +22,23 @@ function onCreate()
 end
 
 local function onKeyDown(e)
-  local char = string.char(e.key)
+  keyDown[e.key] = true
+
+  if not started then
+    started = e.key == KEY_A and keyDown[KEY_D] or e.key == KEY_D and keyDown[KEY_A]
+  end
+end
+
+local function onKeyUp(e)
+  keyDown[e.key] = false
 end
 
 function onOpen()
   flower.InputMgr:addEventListener(flower.Event.KEY_DOWN, onKeyDown)
+  flower.InputMgr:addEventListener(flower.Event.KEY_UP, onKeyUp)
 end
 
 function onClose()
   flower.InputMgr:removeEventListener(flower.Event.KEY_DOWN, onKeyDown)
+  flower.InputMgr:removeEventListener(flower.Event.KEY_UP, onKeyUp)
 end
