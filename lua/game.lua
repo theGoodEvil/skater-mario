@@ -18,6 +18,7 @@ local KEY_A = 97
 local KEY_D = 100
 
 function onCreate()
+
   local layer = flower.Layer()
   layer:setClearColor(92 / 255, 148 / 255, 252 / 255)
   layer:setScene(scene)
@@ -93,6 +94,20 @@ levelState.did.apply.jump = function()
   end)
 end
 
+function gameOver()
+  scene.playerAction:stop()
+
+  -- reset player
+  x, y = scene.player:getLoc()
+  scene.player:setLoc(16 * (x / 16 + 2), PLAYER_OFFSET_TOP)
+
+  -- play intermediate level
+  flower.gotoScene("cutscene", {
+    message = "well done. you made the ride!!",
+    next = function() flower.gotoScene("game") end
+  })
+end
+
 function onUpdate()
   -- update camera
   x, y = scene.player:getLoc()
@@ -100,6 +115,10 @@ function onUpdate()
     x - PLAYER_OFFSET_LEFT,
     scene.tileMap:getWidth() - flower.viewWidth)
   scene.camera:setLoc(cameraX, 0)
+
+  if x >= 3200 then
+    gameOver()
+  end
 
   -- check collision
   tileX = math.floor(x / 16)
